@@ -13,6 +13,7 @@ class _signup_screenState extends State<signup_screen> {
   String email = '';
   String password = '';
   String cpassword = '';
+  var confirmpass ;
   final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -74,8 +75,9 @@ class _signup_screenState extends State<signup_screen> {
                         hintText: 'Enter Password',
                         border: OutlineInputBorder(),
                       ),
-                      validator: (password) {
-                        return password != null && password.length < 8
+                      validator: (value) {
+                         confirmpass = value;
+                        return value != null && value.length < 8
                             ? 'enter password atleast 8 character'
                             : null;
                       },
@@ -91,8 +93,8 @@ class _signup_screenState extends State<signup_screen> {
                         hintText: 'Enter confirm Password',
                         border: OutlineInputBorder(),
                       ),
-                      validator: (password) {
-                        return password != null && password.length < 8
+                      validator: (value) {
+                        return value != null && value != confirmpass
                             ? 'Enter confirm password'
                             : null;
                       },
