@@ -21,107 +21,116 @@ class _Login_screenState extends State<Login_screen> {
       home: Scaffold(
         backgroundColor: Colors.white,
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Text(
-              'Login',
-              style: TextStyle(
-                  color: Colors.blue,
-                  fontSize: 35,
-                  fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-              child: Form(
-                key: fromKey,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                child: Column(
-                  children: [
-                    TextFormField(
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: const InputDecoration(
-                        labelText: 'Email',
-                        hintText: 'Enter Email',
-                        border: OutlineInputBorder(),
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Text(
+                'Login',
+                style: TextStyle(
+                    color: Colors.teal,
+                    fontSize: 35,
+                    fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+                child: Form(
+                  key: fromKey,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: const InputDecoration(
+                          labelText: 'Email',
+                          hintText: 'Enter Email',
+                          border: OutlineInputBorder(),
+                        ),
+                        validator: (email) {
+                          return email != null &&
+                                  !EmailValidator.validate(email)
+                              ? 'Enter valid Email'
+                              : null;
+                          //return email!.isEmpty ? 'please enter Email' : null;
+                        },
                       ),
-                      validator: (email) {
-                        return email != null && !EmailValidator.validate(email)
-                            ? 'Enter valid Email'
-                            : null;
-                        //return email!.isEmpty ? 'please enter Email' : null;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextFormField(
-                      obscureText: true,
-                      keyboardType: TextInputType.visiblePassword,
-                      decoration: const InputDecoration(
-                        labelText: 'Password',
-                        hintText: 'Enter Password',
-                        border: OutlineInputBorder(),
+                      const SizedBox(
+                        height: 10,
                       ),
-                      /*validator: (password) {
+                      TextFormField(
+                        obscureText: true,
+                        keyboardType: TextInputType.visiblePassword,
+                        decoration: const InputDecoration(
+                          labelText: 'Password',
+                          hintText: 'Enter Password',
+                          border: OutlineInputBorder(),
+                        ),
+                        validator: (password) {
                         //return password!.isEmpty ? 'please enter password' : null;
                         return password != null && password.length < 8
-                            ? 'enter password atleast 8 character'
+                            ? 'Enter Password atleast 6 character'
                             : null;
-                      },*/
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                        MaterialButton(
-                          height: 50,
-                          minWidth: 200,
-                          onPressed: () {
-                            final isValidForm =
-                                fromKey.currentState!.validate();
+                      },
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      MaterialButton(
+                        height: 60,
+                        minWidth: double.infinity,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40)
+                      ),
+                        onPressed: () {
+                          final isValidForm = fromKey.currentState!.validate();
 
-                            if (isValidForm) {
-                              Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          dashboard_screen()));
-                            }
-                          },
-                          child: const Text('Login',
-                          style:  TextStyle(color: Colors.white,
-                          fontSize: 20),),
-                          color: Colors.blue,
+                          if (isValidForm) {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => dashboard_screen()));
+                          }
+                        },
+                        child: const Text(
+                          'Login',
+                          style: TextStyle(color: Colors.white, fontSize: 25),
                         ),
-                        const SizedBox(
-                          height: 20,
-              
-                        ),
-                        MaterialButton(
-                          height: 50,
-                          minWidth: 200,
-                          onPressed: () {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => signup_screen()));
-                          },
-                          child:  Text('Sign up For New User',
-                          style:  TextStyle(color: Colors.white,
-                          fontSize: 20),),
-                          color: Colors.blue,
-                        ),
-                        
-                      ],
-                    ),
-                  
+                        color: Colors.teal,
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Dont have an account?'),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => signup_screen()));
+                              },
+                              child: Text(
+                                'Sign up',
+                                style:
+                                    TextStyle(fontSize: 20, color: Colors.teal),
+                              ))
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               ),
-          ]
-        ),
+            ]),
       ),
     );
   }
 }
+/*onPressed: () {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => signup_screen()));
+                          },*/
